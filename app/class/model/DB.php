@@ -8,6 +8,7 @@
 
 namespace Lib\Model;
 
+use \PDO;
 
 class DB
 {
@@ -80,7 +81,7 @@ class DB
         self::$_instance = $instance;
     }
 
-    public static function createDB()
+    public static function access()
     {
         if (null === self::getInstance())
         {
@@ -93,13 +94,13 @@ class DB
     {
         try
         {
-            $this->setPdo(new \PDO("mysql: host=localhost; dbname=biblioteca", "root", "guitar"));
-            return $this->getPdo();
+            $this->setPdo(new PDO("mysql: host=localhost; dbname=biblioteca", "root", "guitar"));
         }
-        catch (\PDOException $e)
+        catch (PDOException $e)
         {
             die($e->getMessage());
         }
+        return $this->getPdo();
     }
 
     private function __clone()
@@ -110,5 +111,13 @@ class DB
     private function __wakeup()
     {
         // TODO: Implement __wakeup() method.
+    }
+
+    public function query($sql)
+    {
+        $this->setSql($sql);
+        $this->setStatement($this->getPdo()->prepare($this->getSql()));
+        $this->getStatement()->execute();
+        return $this->getStatement()->fetchAll(PDO::FETCH_ASSOC);
     }
 }
