@@ -1,0 +1,10 @@
+{
+  "name": "LibMeta",
+  "version": "0.0.1",
+  "dependencies": {
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.0.3",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "uikit": "^3.0.0-rc.6"
+  }
+}

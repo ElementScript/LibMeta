@@ -1,0 +1,17 @@
+{
+  "name": "filipe-machado/LibMeta",
+  "description": "Sistema de gerenciamento de livros e acervos Fameta",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Filipe Machado",
+      "email": "ax-filipe@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lib\\": "app/class/"
+    }
+  }
+}
