@@ -113,7 +113,7 @@ class DB
         // TODO: Implement __wakeup() method.
     }
 
-    public function query($sql)
+    protected function query($sql)
     {
         $this->setSql($sql);
         $this->setStatement($this->getPdo()->prepare($this->getSql()));
