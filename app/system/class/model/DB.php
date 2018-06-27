@@ -94,7 +94,7 @@ class DB
     {
         try
         {
-            $this->setPdo(new PDO("mysql: host=localhost; dbname=biblioteca", "root", "guitar"));
+            $this->setPdo(new PDO("mysql: host=localhost; dbname=biblioteca", "root", ""));
         }
         catch (PDOException $e)
         {
@@ -113,11 +113,45 @@ class DB
         // TODO: Implement __wakeup() method.
     }
 
-    protected function query($sql)
+    private function query($sql)
     {
         $this->setSql($sql);
         $this->setStatement($this->getPdo()->prepare($this->getSql()));
         $this->getStatement()->execute();
         return $this->getStatement()->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function selectAll($table, $columns = "*", $params = [])
+    {
+        if (count($params) > 0) 
+        {
+            $like = $params[0];
+            $fetch =  $this->query("SELECT $columns FROM $table WHERE nome_livro LIKE \"%$like%\"");
+        } 
+        else 
+        {
+            $fetch = $this->query("SELECT $columns FROM $table");
+        }
+        return $fetch;        
+    }
+
+    public function select($table, $columns)
+    {
+        return $this->query("SELECT $columns FROM $table LIKE ");
+    }
+
+    public function insert($table, $columns)
+    {
+
+    }
+
+    public function update($table, $columns)
+    {
+        
+    }
+
+    public function delete($table, $columns)
+    {
+
     }
 }

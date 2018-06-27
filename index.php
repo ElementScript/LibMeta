@@ -12,11 +12,12 @@ use Lib\Model\DB;
 
 $db = DB::access();
 
-$results = $db->query("SELECT * FROM `livro`");
+$results = $db->selectAll("livro", "*", ['m']);
 
 foreach ($results as $result) 
 {
-    foreach ($result as $value) {
-        echo $value . "<br>";
+    foreach ($result as $key => $value) {
+        echo $key . " >>> " . $value . "<br>";
     }
+    echo "<hr>";
 }
